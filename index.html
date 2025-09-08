@@ -16010,4 +16010,40 @@ function _typeof(t){return(_typeof="function"==typeof Symbol&&"symbol"==typeof S
 
 
 </div></body>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // 1. Map variant sizes to their cart URLs
+  const variantRedirects = {
+    "XS": "https://thelumya.com/de-de/cart/11826408718717:1",
+    "S": "https://thelumya.com/de-de/cart/10947162407293:1",
+    "M": "https://thelumya.com/de-de/cart/10947162440061:1",
+    "L": "https://thelumya.com/de-de/cart/10947162374525:1",
+    "XL": "https://thelumya.com/de-de/cart/11157702705533:1"
+  };
+
+  // 2. Grab dropdown + add to cart button
+  const variantSelect = document.getElementById("p-variant-dropdown-2");
+  const addToCartBtn = document.querySelector("button.gp-button-atc");
+
+  if (variantSelect && addToCartBtn) {
+    addToCartBtn.addEventListener("click", function (e) {
+      e.preventDefault(); // stop default action (open cart drawer)
+
+      // 3. Get the selected variant
+      const selectedVariant = variantSelect.value;
+
+      // 4. Find matching URL
+      const redirectUrl = variantRedirects[selectedVariant];
+
+      if (redirectUrl) {
+        window.location.href = redirectUrl; // redirect to correct cart link
+      } else {
+        console.warn("No redirect URL found for variant:", selectedVariant);
+      }
+    });
+  }
+});
+</script>
+
 </html>
