@@ -1335,6 +1335,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         overflow: scroll !important;
         overflow-y: scroll !important;
     }
+    .toast-notification{
+        display: none !important;
+    }
   </style>
 
   <input type="hidden" value="" id="xboost-cart-enabled">
@@ -15903,7 +15906,7 @@ gp-product[data-id="gL7Azv9rGb"] product-form.product-form > square-placement{
           class=" gp-text-instant gp-text"
           style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:center;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--fs:normal;--ff:var(--g-font-body, body);--weight:400;--ls:normal;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:130%;--lh-tablet:130%;--lh-mobile:130%;--c:#242424;word-break:break-word;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;overflow:hidden;--tdl:"
         >
-          <p><span style="color:#161515;">More questions? </span><a href="https://amylacosmetics.com/community/faq"><span style="color:#161515;"><strong><u>See our full FAQ</u></strong></span></a></p>
+          <p><span style="color:#161515;">More questions? </span><a href="/"><span style="color:#161515;"><strong><u>See our full FAQ</u></strong></span></a></p>
         </div>
       </div>
     </div>
@@ -16673,6 +16676,45 @@ function _typeof(t){return(_typeof="function"==typeof Symbol&&"symbol"==typeof S
 </div></body>
 
 
+// <script>
+// document.addEventListener("DOMContentLoaded", function () {
+//   // 1. Map variant sizes to their cart URLs
+//   const variantRedirects = {
+//     "XS": "https://n2kzpa-uw.myshopify.com/cart/52380921069901:1",
+//     "S": "https://n2kzpa-uw.myshopify.com/cart/52380921102669:1",
+//     "M": "https://n2kzpa-uw.myshopify.com/cart/52380921135437:1",
+//     "L": "https://n2kzpa-uw.myshopify.com/cart/52380921168205:1",
+//     "XL": "https://n2kzpa-uw.myshopify.com/cart/52380921200973:1"
+//   };
+
+//   // 2. Grab dropdown + add to cart button
+//   const variantSelect = document.getElementById("p-variant-dropdown-2");
+//   const addToCartBtn = document.querySelectorAll("button.gp-button-atc");
+
+//   if (variantSelect && addToCartBtn) {
+//     addToCartBtn.forEach((button) => {
+//        button.addEventListener("click", function (e) {
+//       e.preventDefault(); // stop default action (open cart drawer)
+
+//       // 3. Get the selected variant
+//       const selectedVariant = variantSelect.value;
+
+//       // 4. Find matching URL
+//       const redirectUrl = variantRedirects[selectedVariant];
+
+//       if (redirectUrl) {
+//         window.location.href = redirectUrl; // redirect to correct cart link
+//       } else {
+//         console.warn("No redirect URL found for variant:", selectedVariant);
+//       }
+//     });
+//     })
+    
+//   }
+// });
+// </script>
+
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   // 1. Map variant sizes to their cart URLs
@@ -16684,30 +16726,31 @@ document.addEventListener("DOMContentLoaded", function () {
     "XL": "https://n2kzpa-uw.myshopify.com/cart/52380921200973:1"
   };
 
-  // 2. Grab dropdown + add to cart button
-  const variantSelect = document.getElementById("p-variant-dropdown-2");
+  // 2. Grab all size radio buttons
+  const variantRadios = document.querySelectorAll('input[name="15342375895421-options-Size"]');
+  // 3. Grab Add to Cart buttons
   const addToCartBtn = document.querySelectorAll("button.gp-button-atc");
 
-  if (variantSelect && addToCartBtn) {
+  if (variantRadios.length && addToCartBtn.length) {
     addToCartBtn.forEach((button) => {
-       button.addEventListener("click", function (e) {
-      e.preventDefault(); // stop default action (open cart drawer)
+      button.addEventListener("click", function (e) {
+        e.preventDefault(); // prevent Shopify default
 
-      // 3. Get the selected variant
-      const selectedVariant = variantSelect.value;
+        // 4. Find which radio is checked
+        const selectedVariant = document.querySelector('input[name="15342375895421-options-Size"]:checked')?.value;
 
-      // 4. Find matching URL
-      const redirectUrl = variantRedirects[selectedVariant];
+        // 5. Find matching URL
+        const redirectUrl = variantRedirects[selectedVariant];
 
-      if (redirectUrl) {
-        window.location.href = redirectUrl; // redirect to correct cart link
-      } else {
-        console.warn("No redirect URL found for variant:", selectedVariant);
-      }
+        if (redirectUrl) {
+          window.location.href = redirectUrl; // redirect to correct cart link
+        } else {
+          console.warn("No redirect URL found for variant:", selectedVariant);
+        }
+      });
     });
-    })
-    
   }
 });
 </script>
+
 </html>
